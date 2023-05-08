@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     "comments.apps.CommentsConfig",
     "posts.apps.PostsConfig",
     # Third-party App
-    "django-countries"
+    "django_countries",
 ]
 
 MIDDLEWARE = [
@@ -127,3 +127,5 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTH_USER_MODEL = 'accounts.CustomUser'

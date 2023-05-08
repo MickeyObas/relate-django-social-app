@@ -1,5 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, User
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+
+from django_countries.fields import CountryField
+
+from .managers import CustomUserManager
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, max_length=255)
@@ -11,6 +15,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+    
+    objects = CustomUserManager()
     
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -24,5 +30,4 @@ class Profile(models.Model):
     profile_picture = models.ImageField(('Profile Picture'), upload_to='images/%Y/%m/%d')
     display_name = models.CharField(max_length=120, blank=True, null=True)
     birthdate = models.DateField()
-    location = models
-    
+    location = CountryField(blank_label="(Select Country)")
