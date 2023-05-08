@@ -1,2 +1,6 @@
 myenv
 manage.py
+db.sqlite3
+steps.txt
+.pyc
+migrations

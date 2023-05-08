@@ -37,6 +37,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Custom Apps
+    "accounts.apps.AccountsConfig",
+    "comments.apps.CommentsConfig",
+    "posts.apps.PostsConfig",
+    # Third-party App
+    "django-countries"
 ]
 
 MIDDLEWARE = [
