@@ -6,5 +6,6 @@ from .models import CustomUser, Profile
 def build_profile(sender, instance, created, **kwargs):
     if created:
         user_object = instance
-        Profile.objects.create()
+        Profile.objects.create(user=user_object)
+        print("All set!")
 
