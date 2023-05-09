@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relate Login</title>
+</head>
+<body>
+
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{message}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    
+    <form action="" method="post">
+        {% csrf_token %}
+        <div>
+            <label for="email">Email</label>
+            <p><input type="email" name="email" id="email" placeholder="Enter your email address..."></p>
+            <label for="password">Password</label>
+            <p><input type="password" name="password" id="password" placeholder="Enter your password..."></p>
+            <p><input type="submit" value="Login"></p>
+        </div>
+    </form>
+</body>
+</html>
