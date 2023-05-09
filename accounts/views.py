@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import auth, messages
 from .forms import CustomUserCreationForm
+from posts.models import Post
 
 def register(request):
     if request.method == 'POST':
@@ -45,8 +46,11 @@ def logout(request):
 
 def index(request):
 
+    posts = Post.objects.all()
+
     context = {
-        "user": request.user
+        "user": request.user,
+        "posts": posts
     }
 
     return render(request, "accounts/index.html", context)

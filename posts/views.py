@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .forms import PostCreateForm
+from .forms import PostCreateForm, PostUpdateForm
+from .models import Post
 
 
 def post_create(request):
@@ -22,8 +23,37 @@ def post_create(request):
 
     return render(request, "posts/create.html", context)
 
-def post_update(request):
-    pass
+def post_update(request, pk):
 
-def post_delete(request):
-    pass
+    post = get_object_or_404(Post, id=pk)
+    form = PostUpdateForm(instance=post)
+
+    if request.method == 'POST':
+        form = PostUpdateForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            print(f"Post: Owner-{post.owner}, Content-{post.body}")
+            post.save()
+            return redirect('index')
+        
+    context = {
+        "form": form
+    }
+
+    return render(request, "posts/update.html", context)
+
+def post_delete(request, pk):
+    
+    post = get_object_or_404(Post, id=pk)
+    print(post.id)
+
+    context = {
+        "post": post
+    }
+
+    if request.method == 'POST':
+        post.delete()
+        messages.success(request, "Your Post has been deleted.")
+        return redirect('index')
+    
+    return render(request, "posts/delete.html", context)
