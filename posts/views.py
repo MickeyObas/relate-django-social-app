@@ -16,6 +16,7 @@ def post_create(request):
             return redirect("index")
 
     form = PostCreateForm()
+    
 
     context = {
         "form": form

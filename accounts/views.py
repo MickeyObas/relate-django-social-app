@@ -4,7 +4,11 @@ from .forms import CustomUserCreationForm, ProfileCreationForm
 from posts.models import Post
 from .models import Profile, CustomUser
 
+
 def register(request):
+
+    form = CustomUserCreationForm()
+
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
@@ -15,8 +19,6 @@ def register(request):
             user.save()
             print("User ID:", user_id)
             return redirect('profile', user_id=user_id)
-        
-    form = CustomUserCreationForm()
 
     context = {
         "form": form

@@ -30,6 +30,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 class Profile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, default=1, related_name="profile")
+    bio = models.TextField(null=True, blank=True)
     profile_picture = models.ImageField(('Profile Picture'), upload_to='profile_images/%Y/%m/%d', default='profile-img.png')
     display_name = models.CharField(max_length=120, blank=True, null=True)
     birthdate = models.DateField(blank=True, null=True)
