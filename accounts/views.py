@@ -8,9 +8,12 @@ def register(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
+            user = form.save()
+            print("User", user)
             user_id = user.id
+            print("User ID:", user_id)
             user.save()
+            print("User ID:", user_id)
             return redirect('profile', user_id=user_id)
         
     form = CustomUserCreationForm()
