@@ -1,12 +1,17 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from posts.models import Post
+from django.contrib.auth.decorators import login_required
+
+
 from .models import Comment
 from .forms import CommentForm
+from posts.models import Post
 
+
+@login_required(login_url='login')
 def comment_post(request, *args, **kwargs):
     
-    post_id = kwargs.get('pk')
     form = CommentForm()
+    post_id = kwargs.get('pk')
     post = get_object_or_404(Post, id=post_id)
 
     if request.method == 'POST':
@@ -24,6 +29,8 @@ def comment_post(request, *args, **kwargs):
 
     return render(request, "comments/comment.html", context)
 
+
+@login_required(login_url='login')
 def comment_delete(request, pk):
 
     comment = get_object_or_404(Comment, id=pk)

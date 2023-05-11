@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+
 from .forms import PostCreateForm, PostUpdateForm
 from .models import Post
 
 
+@login_required(login_url='login')
 def post_create(request):
 
     if request.method == 'POST':
@@ -24,6 +27,8 @@ def post_create(request):
 
     return render(request, "posts/create.html", context)
 
+
+@login_required(login_url='login')
 def post_update(request, pk):
 
     post = get_object_or_404(Post, id=pk)
@@ -43,6 +48,8 @@ def post_update(request, pk):
 
     return render(request, "posts/update.html", context)
 
+
+@login_required(login_url='login')
 def post_delete(request, pk):
     
     post = get_object_or_404(Post, id=pk)
