@@ -38,9 +38,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Custom Apps
+    "index.apps.IndexConfig",
     "accounts.apps.AccountsConfig",
     "comments.apps.CommentsConfig",
     "posts.apps.PostsConfig",
+    "userprofile.apps.UserprofileConfig",
+    "follow.apps.FollowConfig",
     # Third-party App
     "django_countries",
 ]

@@ -1,3 +1,4 @@
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 
@@ -34,6 +35,9 @@ def comment_post(request, *args, **kwargs):
 def comment_delete(request, pk):
 
     comment = get_object_or_404(Comment, id=pk)
+
+    if comment.owner != request.user:
+        raise PermissionDenied()
 
     if request.method == 'POST':
         comment.delete()

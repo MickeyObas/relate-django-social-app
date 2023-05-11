@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.exceptions import PermissionDenied
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required, permission_required
 
 from .forms import PostCreateForm, PostUpdateForm
 from .models import Post
@@ -32,6 +33,10 @@ def post_create(request):
 def post_update(request, pk):
 
     post = get_object_or_404(Post, id=pk)
+
+    if post.owner != request.user:
+        raise PermissionDenied()
+
     form = PostUpdateForm(instance=post)
 
     if request.method == 'POST':
@@ -53,7 +58,9 @@ def post_update(request, pk):
 def post_delete(request, pk):
     
     post = get_object_or_404(Post, id=pk)
-    print(post.id)
+
+    if post.owner != request.user:
+        raise PermissionDenied()
 
     context = {
         "post": post
