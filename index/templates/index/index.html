@@ -28,12 +28,19 @@
         <h3>Post Owner: {{post.owner}}</h3>
         <h3>Post id: {{post.id}}</h3>
         <p>{{post.body}}</p>
-        <p><small>{{post.created | timesince}}</small> <small><a href="">Like Post</a></small></p>
+        <p><small>{{post.created | timesince}}</small> <span style="font-size: 20px;"><a href="{% url 'like-post' post.id %}" style="color: green">
+            {% if post in posts_liked %}
+            Unlike
+            {% else %}
+            Like
+            {% endif %}
+        </a></span></p>
         {% if request.user == post.owner %}
         <a href="{% url 'update-post' pk=post.id %}">Edit Post</a>
         <a href="{% url 'delete-post' pk=post.id %}">Delete Post</a>
         {% endif %}
         <a href="{% url 'comment-post' pk=post.id %}">Comment Post</a>
+        <span>{{post.no_of_likes}} Like{{post.no_of_likes | pluralize}}</span>
         <h3>Comments</h3>
         {% if post.comment_set.all %}
         <ul>
@@ -43,14 +50,14 @@
             {% if request.user == comment.owner %}
             <a href="{% url 'comment-delete' comment.id %}">Delete Comment</a>
             {% endif %}
-            <a href="{% url 'like-post' post.id %}" style="color: green">
-                {% if post in posts_liked %}
+            <a href="{% url 'like-comment' comment.id %}"><small>
+                {% if comment in comments_liked %}
                 Unlike
                 {% else %}
                 Like
                 {% endif %}
-            </a>
-            <p>Likes: </p>
+                Comment</small></a>
+            <p>{{comment.no_of_likes}} Like{{comment.no_of_likes | pluralize}}</p>
             {% endfor %}
         </ul>
         {% else %}

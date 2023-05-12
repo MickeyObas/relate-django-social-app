@@ -19,4 +19,4 @@ class LikeComment(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Comment {self.post.id} liked by {self.user.email}"
+        return f"Comment {self.comment.post.id} liked by {self.user.email}"
