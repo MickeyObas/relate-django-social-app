@@ -12,6 +12,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return "{} - {}".format(self.body[:20], self.owner.email)
+
     
     class Meta:
         ordering = ['-created']

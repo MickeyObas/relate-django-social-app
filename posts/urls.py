@@ -6,5 +6,6 @@ urlpatterns = [
     path("<int:pk>/update-post", views.post_update, name="update-post"),
     path("<int:pk>/delete-post", views.post_delete, name="delete-post"),
 
-    path('<int:pk>/comment/', include('comments.urls'))
+    path('<int:pk>/comment/', include('comments.urls')),
+    path('<int:pk>/like-post/', include('like.urls')),
 ]

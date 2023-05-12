@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "posts.apps.PostsConfig",
     "userprofile.apps.UserprofileConfig",
     "follow.apps.FollowConfig",
+    "like.apps.LikeConfig",
     # Third-party App
     "django_countries",
 ]

@@ -28,7 +28,7 @@
         <h3>Post Owner: {{post.owner}}</h3>
         <h3>Post id: {{post.id}}</h3>
         <p>{{post.body}}</p>
-        <p><small>{{post.created | timesince}}</small></p>
+        <p><small>{{post.created | timesince}}</small> <small><a href="">Like Post</a></small></p>
         {% if request.user == post.owner %}
         <a href="{% url 'update-post' pk=post.id %}">Edit Post</a>
         <a href="{% url 'delete-post' pk=post.id %}">Delete Post</a>
@@ -43,6 +43,14 @@
             {% if request.user == comment.owner %}
             <a href="{% url 'comment-delete' comment.id %}">Delete Comment</a>
             {% endif %}
+            <a href="{% url 'like-post' post.id %}" style="color: green">
+                {% if post in posts_liked %}
+                Unlike
+                {% else %}
+                Like
+                {% endif %}
+            </a>
+            <p>Likes: </p>
             {% endfor %}
         </ul>
         {% else %}
