@@ -1,7 +1,10 @@
 from django.db import models
 from accounts.models import CustomUser
 
+import uuid
+
 class Post(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     body = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to='post_images', blank=True, null=True)
