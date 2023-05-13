@@ -16,6 +16,6 @@ class Comment(models.Model):
         return "{} - {}".format(self.body[:20], self.owner.email)
     
     class Meta:
-        ordering = ['-created']
+        ordering = ['-created', '-no_of_likes']
         verbose_name = 'Comment'
         verbose_name_plural = 'Comments'

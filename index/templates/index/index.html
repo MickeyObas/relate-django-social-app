@@ -25,7 +25,7 @@
 
     {% for post in posts %}
     <div style="border: 3px solid black; padding: 5px; margin-bottom: 5px">
-        <h3>Post Owner: {{post.owner}}</h3>
+        <h3>Post Owner: <a href="{% url 'profile' post.owner.id%}">{{post.owner}}</a></h3>
         <h3>Post id: {{post.id}}</h3>
         <p>{{post.body}}</p>
         <p><small>{{post.created | timesince}}</small> <span style="font-size: 20px;"><a href="{% url 'like-post' post.id %}" style="color: green">
@@ -45,7 +45,8 @@
         {% if post.comment_set.all %}
         <ul>
             {% for comment in post.comment_set.all %}
-            <li>{{comment}}</li>
+            <a href="{% url 'profile' comment.owner.id %}">{{comment.owner}}</a>
+            <li>{{comment.body}}</li>
             <small style="color:red">{{comment.created | timesince}} ago</small>
             {% if request.user == comment.owner %}
             <a href="{% url 'comment-delete' comment.id %}">Delete Comment</a>
